@@ -5,9 +5,6 @@ import numpy as np
 import pandas as pd
 import re
 import psycopg2
-from PIL import Image
-import io
-
 
 database = psycopg2.connect(host="localhost", user="postgres", password="Jaya9698", port=5432, database="bizcard")
 jk = database.cursor()
@@ -119,7 +116,7 @@ with tab2:
                 val = (ls_name, ls_desig, ls_Com, ls_mail, ls_url, ls_m1, ls_m2, ls_add, ls_pin, psycopg2.Binary(image))
                 jk.execute(query, val)
                 database.commit()
-                st.success('Contact stored successfully in database', icon="✅")
+                st.success('Contact stored.', icon="✅")
 
 with tab3:
     col1, col2, col3 = st.columns([2,2,4])
@@ -163,7 +160,7 @@ with tab3:
             val = (ls_name, ls_desig, ls_Com, ls_mail, ls_url, ls_m1, ls_m2, ls_add, ls_pin)
             jk.execute(query, val)
             database.commit()
-            st.success('Contact updated successfully in database', icon="✅")
+            st.success('Contact updated successfully.', icon="✅")
 
     elif selected_mode == 'Delete':
         st.markdown(
@@ -181,17 +178,26 @@ with tab3:
             query = f"DELETE FROM business_cards where name = '{selected_contact}'"
             jk.execute(query)
             database.commit()
-            st.success('Contact removed successfully from database', icon="✅")
+            st.success('Contact removed.', icon="✅")
 
 with tab4:
     st.markdown('__<p style="text-align:left; font-size: 20px; color: #FFC107">Applications and Packages Used :</P>__',
                     unsafe_allow_html=True)
-    st.write("  * Python")
-    st.write("  * PostgresSql")
-    st.write("  * Streamlit")
-    st.write("  * Pandas, Psycopg2, EasyOCR, Re, CV2")
+    col7, col8, col9, col10 = st.columns(4)
+    with col7:
+        st.image("python_logo.png")
+    with col8:
+        st.image("sql_logo.png")
+    with col9:
+        st.image("streamlit_logo.png")
+    with col10:
+        st.image("pandas_logo.png")
+    st.write(" * EasyOCR")
+    st.write("* Re")
+    st.write("* CV2")
     st.markdown('__<p style="text-align:left; font-size: 20px; color: #FFC107">Contact me with :</P>__',
                 unsafe_allow_html=True)
     st.write("LinkedIn : https://www.linkedin.com/in/jaya-krishna-s-aab674196/")
     st.write("Email ID : jkbioinfo99@gmail.com")
     st.write("Github : https://github.com/JayaKrishanS")
+    
